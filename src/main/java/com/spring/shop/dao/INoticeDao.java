@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.spring.shop.dto.NoticeDto;
 
-public interface NoticeDao {
+public interface INoticeDao {
 
 	// 모든 글 가져오기
 	public ArrayList<NoticeDto> selectAll();
