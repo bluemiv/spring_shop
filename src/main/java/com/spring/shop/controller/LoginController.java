@@ -4,11 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class MainController {
+@RequestMapping("login")
+public class LoginController {
 
-	@RequestMapping("/index")
-	public String index() {
-		return "index";
+	@RequestMapping("/loginForm")
+	public String loginForm() {
+		return "login/loginForm";
 	}
-	
 }
