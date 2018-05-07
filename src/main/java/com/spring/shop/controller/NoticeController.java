@@ -1,7 +1,10 @@
 package com.spring.shop.controller;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,11 +18,15 @@ import com.spring.shop.service.NoticeService;
 @RequestMapping("notice")
 public class NoticeController {
 
+	private static final Logger logger = LoggerFactory.getLogger(NoticeController.class);
+	
 	@Autowired
 	private NoticeService noticeService;
 	
 	@RequestMapping("noticeListForm")
-	public String noticeListForm(Model model) {
+	public String noticeListForm(Locale locale, Model model) {
+		logger.info("[System] noticeListForm method ", locale);
+		
 		ArrayList<NoticeDto> list = noticeService.getListAll();
 		
 		model.addAttribute("list", list);
@@ -27,33 +34,41 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("noticeWriteForm")
-	public String noticeWriteForm(Model model) {
+	public String noticeWriteForm(Locale locale, Model model) {
+		logger.info("[System] noticeWriteForm method ", locale);
 		
 		return "notice/noticeWriteForm";
 	}
 	
 	@RequestMapping(value="noticeWritePro", method=RequestMethod.POST)
-	public String noticeWritePro(NoticeDto noticeDto, Model model) {
+	public String noticeWritePro(Locale locale, NoticeDto noticeDto, Model model) {
+		logger.info("[System] noticeWritePro method ", locale);
+		
 		boolean isInsert = noticeService.isInsert(noticeDto);
 		model.addAttribute("isInsert", isInsert);
 		return "forward:noticeListForm";
 	}
 	
 	@RequestMapping("noticeModifyForm")
-	public String noticeModifyForm(Model model) {
+	public String noticeModifyForm(Locale locale, Model model) {
+		logger.info("[System] noticeModifyForm method ", locale);
 		
 		return "notice/noticeModifyForm";
 	}
 	
 	@RequestMapping(value="noticeModifyPro", method=RequestMethod.POST)
-	public String noticeModifyPro(NoticeDto noticeDto, Model model) {
+	public String noticeModifyPro(Locale locale, NoticeDto noticeDto, Model model) {
+		logger.info("[System] noticeModifyPro method ", locale);
+		
 		boolean isUpdate = noticeService.isUpdate(noticeDto);
 		model.addAttribute("isUpdate", isUpdate);
 		return "forward:noticeListForm";
 	}
 	
 	@RequestMapping(value="noticeDelete", method=RequestMethod.POST)
-	public String noticeDelete(Model model, NoticeDto noticeDto) {
+	public String noticeDelete(Locale locale, Model model, NoticeDto noticeDto) {
+		logger.info("[System] noticeDelete method ", locale);
+		
 		boolean isDelete = noticeService.isDelete(noticeDto);
 		model.addAttribute("isDelete", isDelete);
 		return "forward:noticeListForm";
