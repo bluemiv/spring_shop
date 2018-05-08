@@ -6,15 +6,19 @@ import com.spring.shop.dto.UserInfoDto;
 
 public interface ILoginDao {
 
-	// ¸ğµç È¸¿øÀÇ Á¤º¸
+	// ëª¨ë“  íšŒì› ë¦¬ìŠ¤íŠ¸
 	public ArrayList<UserInfoDto> userListAll();
 	
-	// È¸¿ø°¡ÀÔ
+	// ë‚´ ì •ë³´ ê°€ì ¸ì˜¤ê¸°
+	public UserInfoDto getMyInfo(UserInfoDto userInfoDto);
+	
+	// íšŒì›ê°€ì…
 	public int signUp(UserInfoDto userInfoDto);
-
-	// Á¤º¸ ¼öÁ¤
+	public int signUpRole(UserInfoDto userInfoDto);
+	
+	// ì •ë³´ ìˆ˜ì •
 	public int modifiedInfo(UserInfoDto userInfoDto);
 	
-	// È¸¿ø Å»Åğ
+	// íšŒì› íƒˆí‡´
 	public int removeUser(UserInfoDto userInfoDto);
 }

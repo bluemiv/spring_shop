@@ -21,14 +21,14 @@ public class LoginController {
 	@Autowired
 	LoginService loginService;
 	
-	// ∑Œ±◊¿Œ
+	// Î°úÍ∑∏Ïù∏
 	@RequestMapping("/loginForm")
 	public String loginForm(Locale locale) {
 		logger.info("[System] loginForm method ", locale);
 		return "login/loginForm";
 	}
 	
-	// »∏ø¯ ∞°¿‘
+	// ÌöåÏõêÍ∞ÄÏûÖ
 	@RequestMapping("/signUpForm")
 	public String signUpForm(Locale locale) {
 		logger.info("[System] signUpForm method ", locale);
@@ -39,11 +39,19 @@ public class LoginController {
 	@RequestMapping(value = "/signUpPro", method = RequestMethod.POST)
 	public String signUpPro(Locale locale, UserInfoDto userInfoDto) {
 		logger.info("[System] signUpPro method ", locale);
+		System.out.println(userInfoDto.toString());
+		
+		int result = loginService.signUp(userInfoDto);
+		if(result != 0) {
+			logger.info("[System] signUpPro method - success", locale);
+		}else {
+			logger.info("[System] signUpPro method - fail", locale);
+		}
 		
 		return "redirect:loginForm";
 	}
 	
-	// ¡§∫∏ ºˆ¡§
+	// Ï†ïÎ≥¥ÏàòÏ†ï
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public String modify(Locale locale, UserInfoDto userInfoDto) {
 		logger.info("[System] modify method ", locale);
@@ -51,7 +59,7 @@ public class LoginController {
 		return "redirect:loginForm";
 	}
 	
-	// »∏ø¯ ≈ª≈
+	// ÌöåÏõêÌÉàÌá¥
 	@RequestMapping(value = "/leave", method = RequestMethod.POST)
 	public String leave(Locale locale, UserInfoDto userInfoDto) {
 		logger.info("[System] leave method ", locale);

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.shop.dao.ILoginDao">
+	<select id="userListAll" resultType="com.spring.shop.dto.UserInfoDto">
+		SELECT A.*, B.USERROLE
+		FROM USERINFO AS A, USER_ROLE AS B
+		WHERE A.USEREMAIL = B.USEREMAIL
+		ORDER BY A.USERNAME
+	</select>
+	
+	<select id="getMyInfo" parameterType="com.spring.shop.dto.UserInfoDto" resultType="com.spring.shop.dto.UserInfoDto">
+		SELECT A.*, B.USERROLE
+		FROM USERINFO AS A, USER_ROLE AS B
+		WHERE A.USEREMAIL = B.USEREMAIL AND A.USEREMAIL = #{userEmail}
+	</select>
+	
+	<insert id="signUp" parameterType="com.spring.shop.dto.UserInfoDto">
+		INSERT INTO USERINFO
+			(USEREMAIL, USERPWD, USERNAME, USERDATE, USERGENDER, USERAGE, USERADDRESS)
+		VALUES
+			(#{userEmail}, #{userPwd}, #{userName}, NOW(), #{userGender}, #{userAge}, #{userAddress});
+	</insert>
+	<insert id="signUpRole" parameterType="com.spring.shop.dto.UserInfoDto">
+		INSERT INTO USER_ROLE(USEREMAIL, USERROLE)
+		VALUES(#{userEmail}, #{userRole});		
+	</insert>
+	
+	<update id="modifiedInfo" parameterType="com.spring.shop.dto.UserInfoDto">
+		
+	</update>
+	
+	<delete id="removeUser" parameterType="com.spring.shop.dto.UserInfoDto">
+		DELETE A, B
+		FROM USERINFO AS A, USER_ROLE AS B
+		WHERE A.USEREMAIL = B.USEREMAIL AND A.USEREMAIL = #{userEmail}
+	</delete>
+</mapper>
