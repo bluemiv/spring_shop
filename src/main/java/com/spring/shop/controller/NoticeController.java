@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.shop.dto.NoticeDto;
 import com.spring.shop.service.NoticeService;
@@ -41,36 +42,41 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="noticeWritePro", method=RequestMethod.POST)
-	public String noticeWritePro(Locale locale, NoticeDto noticeDto, Model model) {
+	public String noticeWritePro(Locale locale, NoticeDto noticeDto, RedirectAttributes redirectAttributes) {
 		logger.info("[System] noticeWritePro method ", locale);
 		
 		boolean isInsert = noticeService.isInsert(noticeDto);
-		model.addAttribute("isInsert", isInsert);
-		return "forward:noticeListForm";
+		redirectAttributes.addFlashAttribute("isInsert", isInsert);
+		
+		return "redirect:/notice/noticeListForm";
 	}
 	
 	@RequestMapping("noticeModifyForm")
-	public String noticeModifyForm(Locale locale, Model model) {
+	public String noticeModifyForm(Locale locale, Model model, NoticeDto noticeDto) {
 		logger.info("[System] noticeModifyForm method ", locale);
+		
+		model.addAttribute("noticeDto", noticeService.getNoticeOne(noticeDto));
 		
 		return "notice/noticeModifyForm";
 	}
 	
 	@RequestMapping(value="noticeModifyPro", method=RequestMethod.POST)
-	public String noticeModifyPro(Locale locale, NoticeDto noticeDto, Model model) {
+	public String noticeModifyPro(Locale locale, NoticeDto noticeDto, RedirectAttributes redirecAttributes) {
 		logger.info("[System] noticeModifyPro method ", locale);
 		
 		boolean isUpdate = noticeService.isUpdate(noticeDto);
-		model.addAttribute("isUpdate", isUpdate);
-		return "forward:noticeListForm";
+		redirecAttributes.addFlashAttribute("isUpdate", isUpdate);
+		
+		return "redirect:/notice/noticeListForm";
 	}
 	
 	@RequestMapping(value="noticeDelete", method=RequestMethod.POST)
-	public String noticeDelete(Locale locale, Model model, NoticeDto noticeDto) {
+	public String noticeDelete(Locale locale, RedirectAttributes redirectAttributes, NoticeDto noticeDto) {
 		logger.info("[System] noticeDelete method ", locale);
 		
 		boolean isDelete = noticeService.isDelete(noticeDto);
-		model.addAttribute("isDelete", isDelete);
-		return "forward:noticeListForm";
+		redirectAttributes.addFlashAttribute("isDelete", isDelete);
+		
+		return "redirect:/notice/noticeListForm";
 	}
 }

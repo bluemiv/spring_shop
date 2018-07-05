@@ -12,6 +12,7 @@
 	<h1>ShoppingMall</h1>
 	<security:authorize access="isAnonymous()">
 		<a href="login/loginForm">Login</a><br>
+		<a href="login/signUpForm">Sign Up</a><br>
 	</security:authorize>
 	<security:authorize access="isAuthenticated()">
 		<%-- <form action="<c:url value="/logout" />" method = "post">
@@ -20,7 +21,6 @@
 		</form> --%>
 		<a href="<c:url value="/logout" />">logout</a><br>
 	</security:authorize>
-	<a href="login/signUpForm">Sign Up</a><br>
 	<a href="notice/noticeListForm">Notice List</a>
 </body>
 </html>

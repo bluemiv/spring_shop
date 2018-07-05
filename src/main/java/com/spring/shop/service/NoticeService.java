@@ -21,6 +21,12 @@ public class NoticeService {
 		return list;
 	}
 
+	public NoticeDto getNoticeOne(NoticeDto noticeDto) {
+		INoticeDao dao = sqlSession.getMapper(INoticeDao.class);
+		
+		return dao.select(noticeDto);
+	}
+	
 	public boolean isInsert(NoticeDto noticeDto) {
 		boolean result = false;
 		INoticeDao dao = sqlSession.getMapper(INoticeDao.class);
@@ -33,6 +39,7 @@ public class NoticeService {
 
 	public boolean isUpdate(NoticeDto noticeDto) {
 		boolean result = false;
+		
 		INoticeDao dao = sqlSession.getMapper(INoticeDao.class);
 		int temp = dao.modify(noticeDto);
 		if (temp == 1) {
@@ -43,6 +50,7 @@ public class NoticeService {
 
 	public boolean isDelete(NoticeDto noticeDto) {
 		boolean result = false;
+		
 		INoticeDao dao = sqlSession.getMapper(INoticeDao.class);
 		int temp = dao.delete(noticeDto);
 		if (temp == 1) {
