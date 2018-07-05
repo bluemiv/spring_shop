@@ -14,7 +14,9 @@
 	<form action="<%=context%>/notice/noticeWritePro" method="post">
 		제목 : <input type="text" name="noticeTitle" required="required"><br>
 		내용<br>
-		<input type="text" name="noticeContent" required="required"><br>
+		<textarea name="noticeContent" required="required"></textarea><br>
+		<input type="text" name="noticeWriter" disabled="disabled" value="${username}" />
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		<input type="submit" value="작성"/> 
 	</form>
 </body>

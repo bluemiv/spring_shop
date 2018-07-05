@@ -9,13 +9,14 @@ public class UserInfoDto {
 	private String userAge; // varchar(200),
 	private String userAddress; // varchar(300),
 	private String userRole; // varchar(100) not null,
+	private int enabled; // int(1) not null default 1
 
 	// constructor
 	public UserInfoDto() {
 	}
 
 	public UserInfoDto(String userEmail, String userPwd, String userName, String userDate, String userGender,
-			String userAge, String userAddress, String userRole) {
+			String userAge, String userAddress, String userRole, int enabled) {
 		this.userEmail = userEmail;
 		this.userPwd = userPwd;
 		this.userName = userName;
@@ -24,6 +25,7 @@ public class UserInfoDto {
 		this.userAge = userAge;
 		this.userAddress = userAddress;
 		this.userRole = userRole;
+		this.enabled = enabled;
 	}
 
 	// get set method
@@ -91,11 +93,19 @@ public class UserInfoDto {
 		this.userRole = userRole;
 	}
 
+	public int getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
+	}
+
 	@Override
 	public String toString() {
 		return "UserInfoDto [userEmail=" + userEmail + ", userPwd=" + userPwd + ", userName=" + userName + ", userDate="
 				+ userDate + ", userGender=" + userGender + ", userAge=" + userAge + ", userAddress=" + userAddress
-				+ ", userRole=" + userRole + "]";
+				+ ", userRole=" + userRole + ", enabled=" + enabled + "]";
 	}
 
 }
