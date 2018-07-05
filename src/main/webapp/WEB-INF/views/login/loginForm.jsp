@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,15 +16,20 @@
 <body>
 	<h1>loginForm</h1>
 	
+	<security:authorize access="isAnonymous()">
 	<form action="<c:url value="/j_spring_security_check" />" method="post">
 		<c:if test="${error eq true }">
 			<p>로그인 실패</p>
 		</c:if>
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		<%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> --%>
 		ID : <input type="text" name="username"/><br>
 		Password : <input type="password" name="password"/><br>
 		<input type="submit" value="login" />
-	</form>
+	</form>	
+	</security:authorize>
+	<security:authorize access="isAuthenticated()">
+	<a href="<c:url value="/logout" />">logout</a><br>
+	</security:authorize>
 	
 	<a href="signUpForm">Sign Up</a>
 </body>

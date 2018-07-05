@@ -23,10 +23,10 @@ public class LoginService {
 		// TODO Auto-generated method stub
 		int result = 0;
 		ILoginDao dao = sqlSession.getMapper(ILoginDao.class);
-	
-		System.out.println("암호화 되기 전 : " + userInfoDto.getUserPwd());
+
+//		System.out.println("암호화 되기 전 : " + userInfoDto.getUserPwd());
 		userInfoDto.setUserPwd(bcryptPasswordEncoder.encode(userInfoDto.getUserPwd()));
-		System.out.println("암호화 된 후 : " + userInfoDto.getUserPwd());
+//		System.out.println("암호화 된 후 : " + userInfoDto.getUserPwd());
 		
 		result = dao.signUp(userInfoDto);
 		result = dao.signUpRole(userInfoDto);

@@ -8,6 +8,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<security:http auto-config="true" use-expressions="true">
+		<security:csrf disabled="true"/>
 		<security:form-login login-page="/login/loginForm"
 			authentication-failure-url="/login/loginForm?error=true"
 			username-parameter="username" password-parameter="password"
@@ -15,7 +16,7 @@
 			
 		<security:intercept-url pattern="/notice/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" />
 		
-		<security:logout logout-success-url="/index" logout-url="/j_spring_security_logout"/>
+		<security:logout logout-url="/logout" logout-success-url="/index" />
 	</security:http>
 	<!-- 
 	<security:authentication-manager>
